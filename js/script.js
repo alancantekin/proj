@@ -12,7 +12,19 @@ $(document).ready(function() {
 function get_api(position) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
-    document.getElementById("city").innerHTML = lat + ", " + lon;
+    document.getElementById("header").innerHTML = "Location found";
+    // create header
+    let header = document.createElement("h3");
+    let headerText = document.createTextNode("Coordinates");
+    header.appendChild(headerText);
+    // create paragraph
+    let paragraph = document.createElement("p");
+    let paragraphText = document.createTextNode(lat + ", " + lon);
+    paragraph.appendChild(paragraphText);
+    // append tags
+    document.getElementsByClassName("col")[0].appendChild(header);
+    document.getElementsByClassName("col")[0].appendChild(paragraph);
+    // google maps url
     let url = "https://www.google.ch/maps/place/" + lat + "," + lon;
     console.log(url);
     $.get(url, function(response) {
