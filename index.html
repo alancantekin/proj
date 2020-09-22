@@ -1,0 +1,28 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<p id="city">Determinating location...</p>
+
+<script>
+    var x = document.getElementById("city");
+
+    $(document).ready(function() {
+        var position;
+        if (navigator.geolocation) {
+            position = navigator.geolocation.getCurrentPosition(get_api);
+        } else { 
+            x.innerHTML = "Failed to determinate location";
+        }
+    });
+
+    function get_api(position) {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+        x.innerHTML = lat + ", " + lon;
+        let url = "https://www.google.ch/maps/place/" + lat + "," + lon;
+        console.log(url);
+        $.get(url, function(response) {
+            console.log("working");
+            alert(response) 
+        });
+    }
+</script>
